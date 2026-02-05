@@ -1,0 +1,39 @@
+Register User
+---
+tags:
+  - Users
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: Register
+      required:
+        - email
+        - password
+        - full_name
+      properties:
+        email:
+          type: string
+          example: newuser@example.com
+        password:
+          type: string
+          example: password123
+        full_name:
+          type: string
+          example: John Doe
+        role:
+          type: string
+          example: requester
+          description: Optional role (only for admins)
+responses:
+  201:
+    description: User registered successfully
+  400:
+    description: Missing required fields
+  401:
+    description: Authentication required (if not the first user)
+  403:
+    description: Admin privileges required (if not the first user)
+  409:
+    description: Email already registered

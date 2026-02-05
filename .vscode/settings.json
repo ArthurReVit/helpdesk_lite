@@ -1,3 +1,4 @@
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/server/venv/Scripts/python.exe"
+  "python.defaultInterpreterPath": "${workspaceFolder}/server/venv/Scripts/python.exe",
+  "workbench.colorTheme": "Hyper Term Black"
 }

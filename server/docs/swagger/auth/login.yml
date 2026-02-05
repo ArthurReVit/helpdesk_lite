@@ -1,0 +1,44 @@
+User Login
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: Login
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: User email address
+          example: user@example.com
+        password:
+          type: string
+          description: User password
+          example: password123
+responses:
+  200:
+    description: Successful login
+    schema:
+      properties:
+        access_token:
+          type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+            full_name:
+              type: string
+            role:
+              type: string
+  400:
+    description: Missing email or password
+  401:
+    description: Invalid email or password
