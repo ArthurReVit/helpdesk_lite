@@ -1,0 +1,16 @@
+User Logout
+---
+tags:
+  - Authentication
+security:
+  - Bearer: []
+responses:
+  200:
+    description: Logged out successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: Logged out successfully
+  401:
+    description: Unauthorized

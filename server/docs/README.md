@@ -22,3 +22,5 @@ For more specific documentation regarding the modules and features of this proje
 ## Changelog
 
 - [Alpha 0.1.0](./changelog/alpha_0.1.0.md)
+- [Alpha 0.2.0](./changelog/alpha_0.2.0.md)
+- [Alpha 0.3.0](./changelog/alpha_0.3.0.md)
