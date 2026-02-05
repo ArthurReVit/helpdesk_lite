@@ -1,0 +1,40 @@
+Set User Active Status
+---
+tags:
+  - Users
+security:
+  - Bearer: []
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    description: ID of the user to update
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: SetUserActive
+      required:
+        - is_active
+      properties:
+        is_active:
+          type: boolean
+          description: Whether the user should be active or inactive
+          example: true
+responses:
+  200:
+    description: User active status updated successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: User active status updated successfully
+  400:
+    description: Invalid input or attempt to change own status
+  401:
+    description: Unauthorized
+  403:
+    description: Admin privileges required
+  404:
+    description: User not found

@@ -1,0 +1,28 @@
+Delete User
+---
+tags:
+  - Users
+security:
+  - Bearer: []
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    description: ID of the user to delete
+responses:
+  200:
+    description: User deleted successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: User deleted successfully
+  400:
+    description: Attempt to delete own account
+  401:
+    description: Unauthorized
+  403:
+    description: Admin privileges required
+  404:
+    description: User not found

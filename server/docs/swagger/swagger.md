@@ -4,7 +4,7 @@ Swagger is a tool that allows you to document and test your API. You can access 
 
 ## Workflow
 
-For each endpoint added to the swagger, it is important to keep in mind the respective category it belongs to. The categories are:
+For each endpoint added to the swagger, it is important to keep in mind the respective category it belongs to. Each endpoint should have its own swagger page with the .yml format. The categories are:
 
 - [Auth](../api/auth.md)
 - [Users](../api/users.md)
