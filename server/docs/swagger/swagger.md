@@ -8,5 +8,6 @@ For each endpoint added to the swagger, it is important to keep in mind the resp
 
 - [Auth](../api/auth.md)
 - [Users](../api/users.md)
+- [Tags](../api/tags.md)
 
 Said categories will be extended as we progress with the development of the project.

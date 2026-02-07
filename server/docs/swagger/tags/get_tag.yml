@@ -1,0 +1,31 @@
+Get Tag Details
+---
+tags:
+  - Tags
+security:
+  - Bearer: []
+parameters:
+  - name: tag_id
+    in: path
+    type: integer
+    required: true
+    description: ID of the tag to retrieve
+responses:
+  200:
+    description: Tag details retrieved successfully
+    schema:
+      properties:
+        tag:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+  401:
+    description: Unauthorized
+  404:
+    description: Tag not found

@@ -9,6 +9,7 @@ import models
 from api.auth import auth_bp
 from api.users import users_bp
 from api.tickets import ticket_bp
+from api.tags import tags_bp
 
 load_dotenv()
 
@@ -30,6 +31,7 @@ jwt.init_app(app)
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(users_bp, url_prefix="/api/users")
 app.register_blueprint(ticket_bp, url_prefix="/api/tickets")
+app.register_blueprint(tags_bp, url_prefix="/api/tags")
 
 
 @app.route("/")

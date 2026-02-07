@@ -1,0 +1,26 @@
+Delete Tag
+---
+tags:
+  - Tags
+security:
+  - Bearer: []
+parameters:
+  - name: tag_id
+    in: path
+    type: integer
+    required: true
+    description: ID of the tag to delete
+responses:
+  200:
+    description: Tag deleted successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: Tag deleted successfully
+  401:
+    description: Unauthorized
+  403:
+    description: Admin privileges required
+  404:
+    description: Tag not found
