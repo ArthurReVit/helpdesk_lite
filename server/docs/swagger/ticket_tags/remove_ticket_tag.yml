@@ -1,0 +1,40 @@
+Remove Tag from Ticket
+---
+tags:
+  - Ticket Tags
+security:
+  - Bearer: []
+parameters:
+  - name: ticket_id
+    in: path
+    type: integer
+    required: true
+    description: ID of the ticket to remove the tag from
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: RemoveTicketTag
+      required:
+        - tag_id
+      properties:
+        tag_id:
+          type: integer
+          description: ID of the tag to remove
+          example: 1
+responses:
+  200:
+    description: Tag removed from ticket successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: Tag removed from ticket successfully
+  400:
+    description: Missing tag_id
+  401:
+    description: Unauthorized
+  403:
+    description: Admin or agent privileges required
+  404:
+    description: Ticket, Tag, or Association not found

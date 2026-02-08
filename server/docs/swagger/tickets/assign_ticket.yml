@@ -1,0 +1,40 @@
+Assign Ticket
+---
+tags:
+  - Tickets
+security:
+  - Bearer: []
+parameters:
+  - name: ticket_id
+    in: path
+    type: integer
+    required: true
+    description: ID of the ticket to assign
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: AssignTicket
+      required:
+        - assignee_id
+      properties:
+        assignee_id:
+          type: string
+          description: UUID of the agent to assign
+          example: 550e8400-e29b-41d4-a716-446655440000
+responses:
+  200:
+    description: Assignee updated successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: Assignee updated successfully
+  400:
+    description: Missing assignee_id or invalid assignee role
+  401:
+    description: Unauthorized
+  403:
+    description: Admin privileges required
+  404:
+    description: Ticket or Assignee not found

@@ -1,0 +1,43 @@
+Create Ticket
+---
+tags:
+  - Tickets
+security:
+  - Bearer: []
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: CreateTicket
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          example: Login Issue
+        description:
+          type: string
+          example: User cannot login since last update
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          default: medium
+responses:
+  201:
+    description: Ticket created successfully
+    schema:
+      properties:
+        message:
+          type: string
+          example: Ticket created successfully
+        id:
+          type: integer
+          example: 1
+  400:
+    description: Missing required fields
+  401:
+    description: Unauthorized
+  404:
+    description: User not found

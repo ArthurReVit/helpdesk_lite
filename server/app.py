@@ -8,8 +8,9 @@ from flasgger import Swagger
 import models
 from api.auth import auth_bp
 from api.users import users_bp
-from api.tickets import ticket_bp
 from api.tags import tags_bp
+from api.tickets import ticket_bp
+from api.ticket_tags import ticket_tags_bp
 
 load_dotenv()
 
@@ -30,8 +31,9 @@ jwt.init_app(app)
 # Register blueprints
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(users_bp, url_prefix="/api/users")
-app.register_blueprint(ticket_bp, url_prefix="/api/tickets")
 app.register_blueprint(tags_bp, url_prefix="/api/tags")
+app.register_blueprint(ticket_bp, url_prefix="/api/tickets")
+app.register_blueprint(ticket_tags_bp, url_prefix="/api/tickets")
 
 
 @app.route("/")

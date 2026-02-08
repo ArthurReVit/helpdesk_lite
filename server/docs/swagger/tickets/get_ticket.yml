@@ -1,0 +1,46 @@
+Get Ticket Details
+---
+tags:
+  - Tickets
+security:
+  - Bearer: []
+parameters:
+  - name: ticket_id
+    in: path
+    type: integer
+    required: true
+    description: ID of the ticket to retrieve
+responses:
+  200:
+    description: Ticket details retrieved successfully
+    schema:
+      properties:
+        ticket:
+          type: object
+          properties:
+            id:
+              type: integer
+            requester_id:
+              type: string
+            assignee_id:
+              type: string
+            title:
+              type: string
+            description:
+              type: string
+            status:
+              type: string
+            priority:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+  401:
+    description: Unauthorized
+  403:
+    description: Admin privileges required
+  404:
+    description: Ticket not found
