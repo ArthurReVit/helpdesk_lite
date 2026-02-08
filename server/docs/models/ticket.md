@@ -25,9 +25,9 @@ The model's relationships:
 
 ### Quick access list:
 
-- [User](user.md)
-- [Ticket](ticket.md) (You're here)
-- [TicketComment](ticket_comment.md)
-- [TicketEvent](ticket_event.md)
-- [TicketTag](ticket_tag.md)
-- [Tag](tag.md)
+- [User](./user.md)
+- [Ticket](./ticket.md) (You're here)
+- [TicketComment](./ticket_comment.md)
+- [TicketEvent](./ticket_event.md)
+- [TicketTag](./ticket_tag.md)
+- [Tag](./tag.md)

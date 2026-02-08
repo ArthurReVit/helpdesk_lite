@@ -24,7 +24,7 @@ parameters:
           example: 550e8400-e29b-41d4-a716-446655440000
 responses:
   200:
-    description: Assignee updated successfully
+    description: Assignee updated successfully (Action is logged as an `assignee_changed` event)
     schema:
       properties:
         message:

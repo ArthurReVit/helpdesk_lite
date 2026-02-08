@@ -24,7 +24,7 @@ parameters:
           example: 1
 responses:
   200:
-    description: Tag removed from ticket successfully
+    description: Tag removed from ticket successfully (Action is logged as a `tag_removed` event)
     schema:
       properties:
         message:

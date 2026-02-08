@@ -26,7 +26,7 @@ parameters:
           default: medium
 responses:
   201:
-    description: Ticket created successfully
+    description: Ticket created successfully (Action is logged as a `ticket_created` event)
     schema:
       properties:
         message:

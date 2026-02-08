@@ -7,6 +7,7 @@ from flasgger import swag_from
 from extensions import db
 from models.tag import Tag
 from models.ticket import Ticket
+from models.ticket_event import TicketEvent
 from models.ticket_tag import TicketTag
 from models.user import User
 
@@ -22,6 +23,16 @@ def _get_admin_or_agent():
     if current_user.role not in ("admin", "agent"):
         return None, jsonify(message="Admin or agent privileges required"), 403
     return current_user, None, None
+
+
+def _add_ticket_event(ticket_id, actor_id, event_type, meta=None):
+    event = TicketEvent(
+        ticket_id=ticket_id,
+        actor_id=actor_id,
+        event_type=event_type,
+        meta=meta or {},
+    )
+    db.session.add(event)
 
 
 @ticket_tags_bp.route("/<ticket_id>/tags", methods=["GET"])
@@ -71,6 +82,12 @@ def add_ticket_tag(ticket_id):
 
     ticket_tag = TicketTag(ticket_id=ticket.id, tag_id=tag.id)
     db.session.add(ticket_tag)
+    _add_ticket_event(
+        ticket_id=ticket.id,
+        actor_id=current_user.id,
+        event_type="tag_added",
+        meta={"tag_id": tag.id, "tag_name": tag.name},
+    )
     db.session.commit()
 
     return jsonify(message="Tag added to ticket successfully"), 201
@@ -101,6 +118,12 @@ def remove_ticket_tag(ticket_id):
         return jsonify(message="Tag not assigned to ticket"), 404
 
     db.session.delete(ticket_tag)
+    _add_ticket_event(
+        ticket_id=ticket.id,
+        actor_id=current_user.id,
+        event_type="tag_removed",
+        meta={"tag_id": tag.id, "tag_name": tag.name},
+    )
     db.session.commit()
 
     return jsonify(message="Tag removed from ticket successfully"), 200

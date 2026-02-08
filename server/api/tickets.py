@@ -7,6 +7,7 @@ from flasgger import swag_from
 
 from extensions import db
 from models.ticket import Ticket
+from models.ticket_event import TicketEvent
 from models.user import User
 
 ticket_bp = Blueprint("tickets", __name__)
@@ -21,6 +22,16 @@ def _get_admin_user():
     if current_user.role != "admin":
         return None, jsonify(message="Admin privileges required"), 403
     return current_user, None, None
+
+
+def _add_ticket_event(ticket_id, actor_id, event_type, meta=None):
+    event = TicketEvent(
+        ticket_id=ticket_id,
+        actor_id=actor_id,
+        event_type=event_type,
+        meta=meta or {},
+    )
+    db.session.add(event)
 
 
 @ticket_bp.route("/", methods=["GET"])
@@ -213,6 +224,18 @@ def create_ticket():
     )
 
     db.session.add(ticket)
+    db.session.flush()
+    _add_ticket_event(
+        ticket_id=ticket.id,
+        actor_id=requester.id,
+        event_type="ticket_created",
+        meta={
+            "title": ticket.title,
+            "priority": ticket.priority,
+            "status": ticket.status,
+            "requester_id": str(ticket.requester_id),
+        },
+    )
     db.session.commit()
 
     return jsonify(message="Ticket created successfully", id=ticket.id), 201
@@ -249,19 +272,27 @@ def update_ticket(ticket_id):
     allowed_priorities = {"low", "medium", "high", "urgent"}
 
     updates_applied = False
+    status_changed = False
+    priority_changed = False
+    old_status = ticket.status
+    old_priority = ticket.priority
 
     if "status" in data:
         status = data["status"]
         if status not in allowed_statuses:
             return jsonify(message="Invalid status"), 400
-        ticket.status = status
+        if status != ticket.status:
+            ticket.status = status
+            status_changed = True
         updates_applied = True
 
     if "priority" in data:
         priority = data["priority"]
         if priority not in allowed_priorities:
             return jsonify(message="Invalid priority"), 400
-        ticket.priority = priority
+        if priority != ticket.priority:
+            ticket.priority = priority
+            priority_changed = True
         updates_applied = True
 
     if "due_at" in data:
@@ -279,6 +310,21 @@ def update_ticket(ticket_id):
         return (
             jsonify(message="No updatable fields provided: status, priority, due_at"),
             400,
+        )
+
+    if status_changed:
+        _add_ticket_event(
+            ticket_id=ticket.id,
+            actor_id=current_user.id,
+            event_type="status_changed",
+            meta={"old": old_status, "new": ticket.status},
+        )
+    if priority_changed:
+        _add_ticket_event(
+            ticket_id=ticket.id,
+            actor_id=current_user.id,
+            event_type="priority_changed",
+            meta={"old": old_priority, "new": ticket.priority},
         )
 
     db.session.commit()
@@ -308,7 +354,18 @@ def assign_ticket(ticket_id):
     if assignee.role != "agent":
         return jsonify(message="Assignee must have role 'agent'"), 400
 
+    old_assignee_id = ticket.assignee_id
     ticket.assignee_id = assignee.id
+    if old_assignee_id != ticket.assignee_id:
+        _add_ticket_event(
+            ticket_id=ticket.id,
+            actor_id=current_user.id,
+            event_type="assignee_changed",
+            meta={
+                "old": str(old_assignee_id) if old_assignee_id else None,
+                "new": str(ticket.assignee_id) if ticket.assignee_id else None,
+            },
+        )
     db.session.commit()
 
     return jsonify(message="Assignee updated successfully"), 200

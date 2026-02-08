@@ -1,0 +1,46 @@
+Create Ticket Comment
+---
+tags:
+  - Ticket Comments
+security:
+  - Bearer: []
+parameters:
+  - name: ticket_id
+    in: path
+    type: integer
+    required: true
+    description: ID of the ticket to add the comment to
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: CreateTicketComment
+      required:
+        - body
+      properties:
+        body:
+          type: string
+          example: I have looked into the issue and it seems to be related to...
+        is_internal:
+          type: boolean
+          default: false
+          description: Whether the comment is internal (only visible to admins and agents)
+responses:
+  201:
+    description: Comment created successfully (Action is logged as a `comment_added` event)
+    schema:
+      properties:
+        message:
+          type: string
+          example: Comment created successfully
+        id:
+          type: integer
+          example: 1
+  400:
+    description: Missing body
+  401:
+    description: Unauthorized
+  403:
+    description: Access denied or insufficient privileges for internal comment
+  404:
+    description: Ticket or User not found

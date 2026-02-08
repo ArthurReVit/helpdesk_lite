@@ -12,9 +12,9 @@ The model's relationships:
 
 ### Quick access list:
 
-- [User](models/user.md)
-- [Tag](models/tag.md) (You're here)
-- [Ticket](models/ticket.md)
-- [TicketComment](models/ticket_comment.md)
-- [TicketEvent](models/ticket_event.md)
-- [TicketTag](models/ticket_tag.md)
+- [User](./user.md)
+- [Tag](./tag.md) (You're here)
+- [Ticket](./ticket.md)
+- [TicketComment](./ticket_comment.md)
+- [TicketEvent](./ticket_event.md)
+- [TicketTag](./ticket_tag.md)

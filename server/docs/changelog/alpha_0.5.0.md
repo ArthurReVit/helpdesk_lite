@@ -16,7 +16,7 @@
   - `POST /api/tickets/<ticket_id>/tags`: Add a tag to a ticket (Admin/Agent).
   - `DELETE /api/tickets/<ticket_id>/tags`: Remove a tag from a ticket (Admin/Agent).
 - Documented the tickets and ticket tags modules in the [Tickets API Documentation](../api/tickets.md).
-- Created Swagger specifications for the ticket tag module under `docs/swagger/ticket_tags/`.
+- Created Swagger specifications for the ticket management and ticket tag modules under `docs/swagger/`.
 - Integrated the Swagger documentation with the API using `swag_from`.
 
 ## Bug fixes
