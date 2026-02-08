@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 from extensions import db, jwt
@@ -17,6 +18,10 @@ load_dotenv()
 
 app = Flask(__name__)
 swagger = Swagger(app)
+
+# CORS
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+CORS(app, resources={r"/api/*": {"origins": cors_origins}}, supports_credentials=True)
 
 # Configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")

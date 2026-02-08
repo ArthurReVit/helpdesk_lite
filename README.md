@@ -5,3 +5,4 @@ A role-based helpdesk application where users submit tickets, agents manage and 
 ## Index:
 
 - [Server Documentation](./server/docs/README.md)
+- [Client Documentation](./client/docs/README.md)
