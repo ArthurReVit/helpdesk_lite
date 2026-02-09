@@ -27,3 +27,4 @@ For more specific documentation regarding the modules and features of this proje
 - [Alpha 0.4.0](./changelog/alpha_0.4.0.md)
 - [Alpha 0.5.0](./changelog/alpha_0.5.0.md)
 - [Alpha 0.6.0](./changelog/alpha_0.6.0.md)
+- [Alpha 0.7.0](./changelog/alpha_0.7.0.md)

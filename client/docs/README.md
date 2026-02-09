@@ -24,5 +24,6 @@ For more specific documentation regarding the modules and features of the client
 ## Changelog
 
 - [Alpha 0.1.0](./changelog/alpha_0.1.0.md) - Initial setup and basic authentication flow.
-- [Alpha 1.2.0](./changelog/alpha_1.2.0.md) - Layout, User Management, and session TODOs.
-- [Alpha 2.0.0](./changelog/alpha_2.0.0.md) - Ticket Management, and session TODOs.
+- [Alpha 0.2.0](./changelog/alpha_0.2.0.md) - Layout, User Management, and Account features.
+- [Alpha 0.3.0](./changelog/alpha_0.3.0.md) - Core Ticket Management system.
+- [Alpha 0.4.0](./changelog/alpha_0.4.0.md) - Ticket Details, Audit Trail, and Advanced Tagging.

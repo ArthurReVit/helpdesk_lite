@@ -42,6 +42,19 @@ const Layout = () => {
                 <Link to="/tickets">Tickets List</Link>
               </li>
             )}
+            <li>
+              <Link to="/ticket/0">Ticket Detail</Link>
+            </li>
+            {user?.role === "admin" && (
+              <li>
+                <Link to="/tags">Tags List</Link>
+              </li>
+            )}
+            {user?.role === "agent" && (
+              <li>
+                <Link to="/tags">Tags List</Link>
+              </li>
+            )}
             {user?.role === "agent" && (
               <li>
                 <Link to="/agent-tickets">My Assigned Tickets</Link>

@@ -113,4 +113,15 @@ Allows a user to add a comment to a ticket.
 - **Side Effects**:
   - Creates a `comment_added` event in the ticket history.
 
+### Ticket Event History
+
+- GET /api/tickets/<ticket_id>/events:
+
+Retrieves a chronologically ordered list of all audit events for a specific ticket.
+
+- **Constraints**:
+  - Authenticated user (JWT required).
+  - User must be the requester, the assignee, or an administrator.
+  - Internal comment events are hidden from Requesters.
+
 You can refer to the ([Swagger](http://localhost:5000/apidocs)) for more information.

@@ -12,6 +12,8 @@ import Tickets from "./protected__modules/Tickets/Tickets";
 import CreateTicket from "./protected__modules/CreateTicket/CreateTicket";
 import AgentTickets from "./protected__modules/AgentTickets/AgentTickets";
 import MyTickets from "./protected__modules/MyTickets/MyTickets";
+import TagList from "./protected__modules/TagList/TagList";
+import TicketDetail from "./protected__modules/TicketDetail/TicketDetail";
 
 const App = () => {
   const token = getAuthToken();
@@ -40,6 +42,8 @@ const App = () => {
           <Route path="create-ticket" element={<CreateTicket />} />
           <Route path="agent-tickets" element={<AgentTickets />} />
           <Route path="my-tickets" element={<MyTickets />} />
+          <Route path="tags" element={<TagList />} />
+          <Route path="ticket/:id" element={<TicketDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

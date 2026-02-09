@@ -10,6 +10,7 @@ import type {
   ListTicketsResponse,
   ListAssigneeTicketsResponse,
   ListRequesterTicketsResponse,
+  ListTicketEventsResponse,
   UpdateTicketRequest,
   UpdateTicketResponse,
 } from "../../models/ticket";
@@ -37,6 +38,12 @@ export const ticketApi = createApi({
     getTicket: builder.query<GetTicketResponse, number>({
       query: (ticket_id) => ({
         url: `/${ticket_id}`,
+        method: "GET",
+      }),
+    }),
+    listTicketEvents: builder.query<ListTicketEventsResponse, number>({
+      query: (ticket_id) => ({
+        url: `/${ticket_id}/events`,
         method: "GET",
       }),
     }),
@@ -79,6 +86,7 @@ export const ticketApi = createApi({
 export const {
   useListTicketsQuery,
   useGetTicketQuery,
+  useListTicketEventsQuery,
   useAssignTicketMutation,
   useUpdateTicketMutation,
   useCreateTicketMutation,

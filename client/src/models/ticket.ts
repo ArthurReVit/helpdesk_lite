@@ -9,6 +9,26 @@ export type TicketStatus =
 
 export type TicketPriority = "low" | "medium" | "high" | "urgent";
 
+export type TicketEventType =
+  | "ticket_created"
+  | "status_changed"
+  | "priority_changed"
+  | "assignee_changed"
+  | "title_changed"
+  | "description_changed"
+  | "tag_added"
+  | "tag_removed"
+  | "comment_added";
+
+export type TicketEvent = {
+  id: number;
+  ticket_id: number;
+  actor_id: string | null;
+  event_type: TicketEventType;
+  meta: Record<string, unknown>;
+  created_at: string | null;
+};
+
 export type Ticket = {
   id: number;
   requester_id: string;
@@ -63,6 +83,10 @@ export type ListAssigneeTicketsResponse = {
 
 export type ListRequesterTicketsResponse = {
   tickets: TicketListItem[];
+};
+
+export type ListTicketEventsResponse = {
+  events: TicketEvent[];
 };
 
 export type GetTicketResponse = {

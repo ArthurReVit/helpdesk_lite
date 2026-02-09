@@ -32,7 +32,6 @@
   - Search by name.
   - Multi-column sorting (Full name, Email, Role, Active status).
   - Lifecycle actions: Toggle active status or delete users.
-  - Optimized to avoid cascading renders.
 
 ### Account (`src/protected__modules/Account/`)
 
@@ -59,6 +58,20 @@
 
 - **Tickets.tsx**: Comprehensive view for administrators to see all system tickets and perform assignments.
 
+#### Ticket Detail (`src/protected__modules/TicketDetail/`)
+
+- **TicketDetail.tsx**: A granular view of a single ticket.
+- **Includes**:
+  - **Audit Log**: Chronological feed of ticket events (status changes, etc.).
+  - **Thread**: Comment-based conversation system.
+  - **Internal Notes**: Staff-only discussion toggle.
+
+### Tag Management
+
+#### Tag List (`src/protected__modules/TagList/`)
+
+- **TagList.tsx**: Administrative interface for managing the system's global tag repository (Create, Rename, Delete).
+
 ## Layout and Routing
 
 ### Layout (`src/protected__modules/Layout/`)
@@ -73,4 +86,4 @@
 
 - **BrowserRouter**: Root router for the application.
 - **Nested Routes**: Uses the `Layout` component as a parent for protected routes.
-- **Authentication Guard**: Proactively decodes auth state and redirects unauthenticated users to `/login`.
+- **Path Mapping**: Maps modules to routes like `/ticket/:id`, `/tags`, `/users`, etc.
