@@ -14,6 +14,7 @@ const AddUser = () => {
     (state) => state.users,
   );
   const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const user = useAppSelector((state) => state.auth.user);
 
   const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,6 +34,10 @@ const AddUser = () => {
       // Errors handled by slice + mutation state.
     }
   };
+
+  if (!user || user.role !== "admin") {
+    return <div>You're not supposed to be here. Sending alert...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

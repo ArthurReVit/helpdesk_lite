@@ -6,6 +6,7 @@ import {
   useSetUserActiveMutation,
 } from "../../lib/app_state/userApi";
 import type { UserSortBy, UserSortDirection, User } from "../../models/user";
+import { useAppSelector } from "../../lib/app_state/hooks";
 
 const PAGE_SIZES = [5, 10, 15, 20] as const;
 
@@ -15,6 +16,7 @@ const UsersList = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [sortBy, setSortBy] = useState<UserSortBy>("full_name");
   const [sortDir, setSortDir] = useState<UserSortDirection>("asc");
+  const user = useAppSelector((state) => state.auth.user);
 
   const { data, isFetching, isError } = useListUsersQuery({
     sort: sortDir,
@@ -52,6 +54,10 @@ const UsersList = () => {
     const suffix = active ? (sortDir === "asc" ? " ▲" : " ▼") : "";
     return `${label}${suffix}`;
   };
+
+  if (!user || user.role !== "admin") {
+    return <div>You're not supposed to be here. Sending alert...</div>;
+  }
 
   return (
     <div>

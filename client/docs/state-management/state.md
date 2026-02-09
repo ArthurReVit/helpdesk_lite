@@ -6,27 +6,43 @@ The application uses **Redux Toolkit** for centralized state management. The sto
 
 ## RTK Query (Data Fetching)
 
-We use **RTK Query** for efficient data fetching and caching.
+We use **RTK Query** for efficient data fetching, caching, and cache invalidation.
 
 ### Auth API (`authApi.ts`)
 
 - **Endpoints**:
   - `login`: Mutation for user authentication.
   - `me`: Query to fetch current user profile.
-- **Base URL**: Configured via environment variables (usually `/api/auth`).
-- **Headers**: Automatically injects the Bearer token from cookies/local storage.
+- **Base URL**: `/api/auth`.
+- **Headers**: Automatically injects the Bearer token from cookies.
 
 ### User API (`userApi.ts`)
 
 - **Endpoints**:
-  - `registerUser`: Mutation for creating new users (admin only).
+  - `registerUser`: Create new users (admin only).
+  - `listUsers`: Searchable and sortable user list.
+  - `deleteUser`: Permanently remove a user record.
+  - `setUserActive`: Toggle account status (Active/Deactivated).
+  - `changePassword`: Mutation for users to update their own credentials.
 - **Base URL**: `/api/users`.
-- **Headers**: Automatically injects bearer token for authorization.
+
+### Ticket API (`ticketApi.ts`)
+
+- **Endpoints**:
+  - `createTicket`: Submit a new support request.
+  - `listTickets`: Admin list of all system tickets.
+  - `listMyTickets`: Requesters' view of their own tickets.
+  - `listAgentTickets`: Agents' view of assigned work.
+  - `assignTicket`: Link a ticket to an agent.
+  - `updateTicket`: Modify status (e.g., Resolve) or priority.
+- **Base URL**: `/api/tickets`.
 
 ## Slices
 
-- **Auth Slice (`authSlice.ts`)**: Manages local authentication state, such as the current user object and session status.
+- **Auth Slice (`authSlice.ts`)**: Manages local authentication state and the current user profile.
+- **Ticket Slice (`ticketSlice.ts`)**: Handles global ticket UI states and centralized error messaging for ticket lists.
+- **User Slice (`userSlice.ts`)**: Manages temporary states for user management workflows.
 
 ## Persistence
 
-Authentication tokens are persisted using cookies/local storage via `src/lib/app_state/authCookies.ts`.
+Authentication tokens are persisted using high-security cookies via `src/lib/app_state/authCookies.ts`. This allows session persistence across page refreshes while the `me` query handles re-authentication.

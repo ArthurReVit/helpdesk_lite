@@ -25,3 +25,4 @@ For more specific documentation regarding the modules and features of the client
 
 - [Alpha 0.1.0](./changelog/alpha_0.1.0.md) - Initial setup and basic authentication flow.
 - [Alpha 1.2.0](./changelog/alpha_1.2.0.md) - Layout, User Management, and session TODOs.
+- [Alpha 2.0.0](./changelog/alpha_2.0.0.md) - Ticket Management, and session TODOs.

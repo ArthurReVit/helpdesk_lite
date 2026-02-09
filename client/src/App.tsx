@@ -8,6 +8,10 @@ import Layout from "./protected__modules/Layout/Layout";
 import AddUser from "./protected__modules/AddUser/AddUser";
 import UsersList from "./protected__modules/UsersList/UsersList";
 import Account from "./protected__modules/Account/Account";
+import Tickets from "./protected__modules/Tickets/Tickets";
+import CreateTicket from "./protected__modules/CreateTicket/CreateTicket";
+import AgentTickets from "./protected__modules/AgentTickets/AgentTickets";
+import MyTickets from "./protected__modules/MyTickets/MyTickets";
 
 const App = () => {
   const token = getAuthToken();
@@ -32,6 +36,10 @@ const App = () => {
           <Route path="new-user" element={<AddUser />} />
           <Route path="users" element={<UsersList />} />
           <Route path="account" element={<Account />} />
+          <Route path="tickets" element={<Tickets />} />
+          <Route path="create-ticket" element={<CreateTicket />} />
+          <Route path="agent-tickets" element={<AgentTickets />} />
+          <Route path="my-tickets" element={<MyTickets />} />
         </Route>
       </Routes>
     </BrowserRouter>
