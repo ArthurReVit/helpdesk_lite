@@ -16,6 +16,13 @@ We use **RTK Query** for efficient data fetching and caching.
 - **Base URL**: Configured via environment variables (usually `/api/auth`).
 - **Headers**: Automatically injects the Bearer token from cookies/local storage.
 
+### User API (`userApi.ts`)
+
+- **Endpoints**:
+  - `registerUser`: Mutation for creating new users (admin only).
+- **Base URL**: `/api/users`.
+- **Headers**: Automatically injects bearer token for authorization.
+
 ## Slices
 
 - **Auth Slice (`authSlice.ts`)**: Manages local authentication state, such as the current user object and session status.
